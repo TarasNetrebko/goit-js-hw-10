@@ -16,8 +16,8 @@ function fetchHandler(e) {
         return;
     }
     const countryArray = fetchCountries(e.target.value.trim()).then(array => {
-        if (!array.ok) {
-            Promise.reject("error", array.status);
+        if (!array.status === 404) {
+            Promise.reject("Error: ", array.status);
               }
         if (array.length > 10) {
             Notiflix.Notify.info("Too many matches found. Please enter a more specific name.");
