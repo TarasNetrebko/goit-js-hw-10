@@ -50,6 +50,7 @@ function fetchHandler(e) {
         }
         return array;
     }).catch(error => {
+        console.log(error);
         Notiflix.Notify.failure("Oops, there is no country with that name");
     });
     console.log(countryArray);
