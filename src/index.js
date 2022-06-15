@@ -16,8 +16,10 @@ function fetchHandler(e) {
         return;
     }
     const countryArray = fetchCountries(e.target.value.trim()).then(array => {
-        if (!array.status === 404) {
-            Promise.reject("Error: ", array.status);
+        if (!array.ok) {            
+            Promise.reject("Error: ", array.status).catch(error => {
+                Notiflix.Notify.failure("Oops, there is no country with that name");
+            });
               }
         if (array.length > 10) {
             Notiflix.Notify.info("Too many matches found. Please enter a more specific name.");
@@ -51,7 +53,6 @@ function fetchHandler(e) {
         return array;
     }).catch(error => {
         console.log(error);
-        Notiflix.Notify.failure("Oops, there is no country with that name");
     });
     console.log(countryArray);
     return countryArray;
