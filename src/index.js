@@ -16,6 +16,9 @@ function fetchHandler(e) {
         return;
     }
     const countryArray = fetchCountries(e.target.value.trim()).then(array => {
+        if (!array.ok) {
+            Promise.reject();
+              }
         if (array.length > 10) {
             Notiflix.Notify.info("Too many matches found. Please enter a more specific name.");
             countryList.innerHTML = "";
@@ -45,9 +48,6 @@ function fetchHandler(e) {
                         <p><span>Languages:</span> ${Object.values(languages).join(", ")}</p>`).join("");
             countryInfo.insertAdjacentHTML("beforeend", countryCardRender);
         }
-        if (array.status === 404) {
-                array.reject();
-              }
         return array;
     }).catch(error => {
         Notiflix.Notify.failure("Oops, there is no country with that name");
