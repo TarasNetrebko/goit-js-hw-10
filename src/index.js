@@ -17,7 +17,7 @@ function fetchHandler(e) {
     }
     const countryArray = fetchCountries(e.target.value.trim()).then(array => {
         if (!array.ok) {    
-            return Promise.reject("Error: ", array.status);
+            return Promise.reject("Error 404");
               }
         if (array.length > 10) {
             Notiflix.Notify.info("Too many matches found. Please enter a more specific name.");
